@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Attendance Reports</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script>
+// Sidebar highlight
+const sidebarItems = document.querySelectorAll('.sidebar ul li');
+
+// Active based on current page
+const currentPage = location.pathname.split("/").pop();
+
+sidebarItems.forEach(item => {
+  // markaa link-ka uu la mid yahay page-ka hadda
+  if(item.textContent.toLowerCase() + ".html" === currentPage) {
+    item.classList.add('active');
+  }
+
+  // markaa click gareeyo highlight muuqdo
+  item.addEventListener('click', () => {
+    sidebarItems.forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+  });
+});
+</script>
+
+
+<div class="container">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Admin</h2>
+    
+    <ul>
+      <li onclick="location.href='index.html'">Dashboard</li>
+      <li onclick="location.href='students.html'">Students</li>
+      <li>Teachers</li>
+      <li>Classes</li>
+      <li onclick="location.href='attendance.html'">Attendance</li>
+      <li>Reports</li>
+      <li>Logout</li>
+    </ul>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+    <h1>Attendance Reports</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Student Name</th>
+          <th>Class</th>
+          <th>Present Days</th>
+          <th>Absent Days</th>
+          <th>Attendance %</th>
+        </tr>
+      </thead>
+      <tbody id="reportTable">
+        <tr>
+          <td>1</td>
+          <td>Ahmed Ali</td>
+          <td>Class A</td>
+          <td>18</td>
+          <td>2</td>
+          <td>90%</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Fatima Noor</td>
+          <td>Class A</td>

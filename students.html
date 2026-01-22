@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Students</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script>
+// Sidebar highlight
+const sidebarItems = document.querySelectorAll('.sidebar ul li');
+
+// Active based on current page
+const currentPage = location.pathname.split("/").pop();
+
+sidebarItems.forEach(item => {
+  // markaa link-ka uu la mid yahay page-ka hadda
+  if(item.textContent.toLowerCase() + ".html" === currentPage) {
+    item.classList.add('active');
+  }
+
+  // markaa click gareeyo highlight muuqdo
+  item.addEventListener('click', () => {
+    sidebarItems.forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+  });
+});
+</script>
+
+
+<div class="container">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Admin</h2>
+    
+    <ul>
+      <li onclick="location.href='index.html'">Dashboard</li>
+      <li>Students</li>
+      <li>Teachers</li>
+      <li>Classes</li>
+      <li>Attendance</li>
+      <li>Logout</li>
+    </ul>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+    <h1>Students Management</h1>
+
+    <!-- Add Student Form -->
+    <form id="studentForm" class="form">
+      <input type="text" id="name" placeholder="Student Name" required>
+      <input type="text" id="class" placeholder="Class" required>
+      <button type="submit">Add Student</button>
+    </form>
+
+    <!-- Students Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Class</th>
+        </tr>
+      </thead>
+      <tbody id="studentTable"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+let count = 1;
+const form = document.getElementById("studentForm");
+const table = document.getElementById("studentTable");
+
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const cls = document.getElementById("class").value;
+
+  const row = `
+    <tr>
+      <td>${count++}</td>
+      <td>${name}</td>
+      <td>${cls}</td>
+    </tr>
+  `;
+  table.innerHTML += row;
+
+  form.reset();
+});
+</script>
+
+</body>
+</html>
